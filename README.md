@@ -1,91 +1,202 @@
-# Machine Learning Homework - Exoplanet Exploration
+## Machine Learning Challenge - Exoplanet Exploration
 
-![exoplanets.jpg](Images/exoplanets.jpg)
+------
 
-### Before You Begin
+### Description:
 
-1. Create a new repository for this project called `machine-learning-challenge`. **Do not add this homework to an existing repository**.
+The purpose of this project was to determine classifications of NASA's Kepler Space Observatory Exoplanet Search Dataset using multiple Machine Learning and Deep Learning algorithms. The dataset reviewed included 6992 rows x 40 columns of data collected over a six year period. 
 
-2. Clone the new repository to your computer.
+For the analysis, I used the SVM (Support Vector Machines), Random Forest, and KNN (K Nearest Neighbor) from the Pandas scikit-learn modules. I also used the Tensorflow Keras Neural Network and Deep Learning algorithm for my final analysis.
 
-3. Give each model you choose their own Jupyter notebook, **do not use more than one model per notebook.**
+### Analysis:
 
-4. Save your best model to a file. This will be the model used to test your accuracy and used for grading.
+- **Summary**
 
-5. Commit your Jupyter notebooks and model file and push them to GitHub.
+  The results shown below for each classification algorithm demonstrate that different algorithms have different performance characteristics when compared to each other with a Confusion Matrix.  The results of the Confusion Matrix is summarized in a Classification Report, which can be easily interpreted and compared. The f1-scores in these tables show the average scores for the model,  and are the primary numbers to compare between models. 
 
-## Note
+  As indicated in the tables below, the highest f1-score for Accuracy has a value of 0.90, and was obtained using the Random Forest model.  The Keras Deep Neural Network model reached an almost identical Accuracy value of 0.8987. Therefore, the Random Forest algorithm seems to be the most accurate overall.
 
-Keep in mind that this homework is optional! However, you will gain a much greater understanding of testing and tuning different Classification models if you do complete it.
+  However, when examining only the FALSE POSITIVE criteria, both the KNN and SVM algorithm have identical f1-scores of 0.99. 
 
-## Background
+  The model with the highest CONFIRMED f1-score is the Random Forest with a value of 0.85.
 
-Over a period of nine years in deep space, the NASA Kepler space telescope has been out on a planet-hunting mission to discover hidden planets outside of our solar system.
+  
 
-To help process this data, you will create machine learning models capable of classifying candidate exoplanets from the raw dataset.
+------
 
-In this homework assignment, you will need to:
 
-1. [Preprocess the raw data](#Preprocessing)
-2. [Tune the models](#Tune-Model-Parameters)
-3. [Compare two or more models](#Evaluate-Model-Performance)
 
-- - -
+- **Random Forest**
 
-## Instructions
+  With Hyperparameter Tuning using GridSearchCV:
 
-### Preprocess the Data
+  ```
+  Best Parameters: {'max_depth': 100, 'n_estimators': 1000}
+  Best Score: 0.8928053980890562
+  ```
 
-* Preprocess the dataset prior to fitting the model.
-* Perform feature selection and remove unnecessary features.
-* Use `MinMaxScaler` to scale the numerical data.
-* Separate the data into training and testing data.
+  ```
+  Training Grid Score: 1.0
+  Testing Grid Score: 0.8953089244851259
+  ```
 
-### Tune Model Parameters
+  Classification Report:
 
-* Use `GridSearch` to tune model parameters.
-* Tune and compare at least two different classifiers.
+  ```
+           precision    recall  f1-score   support
+  
+       CANDIDATE       0.83      0.76      0.80       411
+       CONFIRMED       0.84      0.86      0.85       484
+  FALSE POSITIVE       0.97      1.00      0.98       853
+  
+        accuracy                           0.90      1748
+       macro avg       0.88      0.87      0.87      1748
+    weighted avg       0.90      0.90      0.90      1748
+  ```
 
-### Reporting
+  
 
-* Create a README that reports a comparison of each model's performance as well as a summary about your findings and any assumptions you can make based on your model (is your model good enough to predict new exoplanets? Why or why not? What would make your model be better at predicting new exoplanets?).
+  ------
 
-- - -
+  
 
-## Resources
+- **KNN (K Nearest Neighbor)**
 
-* [Exoplanet Data Source](https://www.kaggle.com/nasa/kepler-exoplanet-search-results)
+  Classification Report for Basic Model:
 
-* [Scikit-Learn Tutorial Part 1](https://www.youtube.com/watch?v=4PXAztQtoTg)
+  ```
+                 precision    recall  f1-score   support
+  
+       CANDIDATE       0.61      0.30      0.40       411
+       CONFIRMED       0.58      0.84      0.69       484
+  FALSE POSITIVE       0.98      0.97      0.97       853
+  
+        accuracy                           0.78      1748
+       macro avg       0.72      0.70      0.69      1748
+    weighted avg       0.78      0.78      0.76      1748
+  ```
 
-* [Scikit-Learn Tutorial Part 2](https://www.youtube.com/watch?v=gK43gtGh49o&t=5858s)
+  Classification Report with Hyperparameter Tuning using GridSearchCV:
 
-* [Grid Search](https://scikit-learn.org/stable/modules/grid_search.html)
+  ```
+                 precision    recall  f1-score   support
+  
+       CANDIDATE       0.68      0.57      0.62       411
+       CONFIRMED       0.68      0.75      0.71       484
+  FALSE POSITIVE       0.98      1.00      0.99       853
+  
+        accuracy                           0.83      1748
+       macro avg       0.78      0.77      0.77      1748
+    weighted avg       0.83      0.83      0.83      1748
+  ```
 
-- - -
+  
 
-## Hints and Considerations
+  ------
 
-* Start by cleaning the data, removing unnecessary columns, and scaling the data.
+  
 
-* Not all variables are significant be sure to remove any insignificant variables.
+- **SVM (Support Vector Machines)**
 
-* Make sure your `sklearn` package is up to date.
+  Basic Model:
 
-* Try a simple model first, and then tune the model using `GridSearch`.
+  ```
+  Training Data Score: 0.8455082967766546
+  Testing Data Score: 0.8415331807780321
+  ```
 
-- - -
+  Best Parameters and Scores:
 
-## Submission
+  ```
+  {'C': 10, 'gamma': 0.0001}
+  0.8714435412861394
+  ```
 
-* Create a Jupyter Notebook for each model and host the notebooks on GitHub.
+  With Hyperparameter Tuning using GridSearchCV:
 
-* Create a file for your best model and push to GitHub
+  ```
+  Training Grid Score: 0.8758344459279038
+  Testing Grid Score: 0.8735697940503433
+  ```
 
-* Include a README.md file that summarizes your assumptions and findings.
+  Classification Report:
 
-* Submit the link to your GitHub project to Bootcamp Spot.
+  ```
+                  precision    recall  f1-score   support
+  
+       CANDIDATE       0.81      0.64      0.72       411
+       CONFIRMED       0.75      0.85      0.79       484
+  FALSE POSITIVE       0.98      1.00      0.99       853
+  
+        accuracy                           0.87      1748
+       macro avg       0.84      0.83      0.83      1748
+    weighted avg       0.87      0.87      0.87      1748
+  ```
 
-* Ensure your repository has regular commits (i.e. 20+ commits) and a thorough README.md file
+  
 
-##### © 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+------
+
+
+
+- **Keras Deep Learning**
+
+  Normal Neural Network:
+
+  One layer with 10 nodes. Epoch = 1000
+
+  ```
+  Normal Neural Network - Loss: 0.25185666367991294, Accuracy: 0.8981693387031555
+  ```
+
+  
+
+  Deep Neural Network:
+
+  Two layers with 12 nodes. Epoch = 400
+
+  ```
+  Deep Neural Network - Loss: 0.2640214726090158, Accuracy: 0.8987414240837097
+  ```
+
+  Increasing number of layers, nodes, and epochs decreased the Accuracy.
+
+  
+
+------
+
+
+
+### Files Included:
+
+- **data**
+
+  exoplanet_data.csv
+
+  
+
+- **notebooks**
+
+  model_Random_Forest.ipynb
+
+  model_KNN.ipynb
+
+  model_SVM.ipynb
+
+  model_Keras.ipynb
+
+  
+
+- **saved_models**
+
+  Random_Forest_model.sav
+
+  KNN_model.sav
+
+  SVM_model.sav
+
+  neural_network_model.h5
+
+  deep_learning_model.h5
+
+#### 

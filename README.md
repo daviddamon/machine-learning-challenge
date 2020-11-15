@@ -4,27 +4,27 @@
 
 ### Description:
 
-The purpose of this project was to determine classifications of NASA's Kepler Space Observatory Exoplanet Search Dataset using multiple Machine Learning and Deep Learning algorithms. The dataset reviewed included 6992 rows x 40 columns of data collected over a six year period. 
+The purpose of this project was to create machine learning models capable of classifying candidate exoplanets using NASA's Kepler Space Observatory Exoplanet Search Dataset.  The dataset reviewed included a csv file of 6992 rows x 40 columns of data collected over a six year period. 
 
-For the analysis, I used the SVM (Support Vector Machines), Random Forest, and KNN (K Nearest Neighbor) from the Pandas scikit-learn modules. I also used the Tensorflow Keras Neural Network and Deep Learning algorithm for my final analysis.
+For the analysis, multiple Machine Learning and Deep Learning algorithms were used, including Random Forest, KNN (K Nearest Neighbor), and SVM (Support Vector Machines) from the Pandas Scikit-Learn modules. The Keras Pandas Neural Network and Deep Learning algorithm was also used as another method of analysis.
+
+------
 
 ### Analysis:
 
 - **Summary**
 
+  For each model, the raw csv dataset was read into a Pandas data frame and cleaned to remove null columns and rows. Desired Features were selected for model training, and the Train Test Split process was run. Data was then scaled using the MinMaxScaler model, the model was trained, and initial results were produced. The models then received Hyperparameter Tuning using GridSearchCV to reach final scores that were displayed in a Classification Report. 
+
   The results shown below for each classification algorithm demonstrate that different algorithms have different performance characteristics when compared to each other with a Confusion Matrix.  The results of the Confusion Matrix is summarized in a Classification Report, which can be easily interpreted and compared. The f1-scores in these tables show the average scores for the model,  and are the primary numbers to compare between models. 
 
-  As indicated in the tables below, the highest f1-score for Accuracy has a value of 0.90, and was obtained using the Random Forest model.  The Keras Deep Neural Network model reached an almost identical Accuracy value of 0.8987. Therefore, the Random Forest algorithm seems to be the most accurate overall.
+  As indicated in the tables below, the highest f1-score reached for Accuracy has a value of 0.90, and was obtained using the Random Forest model.  The Keras Deep Neural Network model attained an almost identical Accuracy value of 0.8987. Therefore, the Random Forest and Keras algorithms seem to be the most accurate overall.
 
-  However, when examining only the FALSE POSITIVE criteria, both the KNN and SVM algorithm have identical f1-scores of 0.99. 
+  However, when examining only the FALSE POSITIVE criteria, both the KNN and SVM algorithm have identical highest f1-scores of 0.99. 
 
   The model with the highest CONFIRMED f1-score is the Random Forest with a value of 0.85.
-
   
-
-------
-
-
+  
 
 - **Random Forest**
 
@@ -53,10 +53,6 @@ For the analysis, I used the SVM (Support Vector Machines), Random Forest, and K
        macro avg       0.88      0.87      0.87      1748
     weighted avg       0.90      0.90      0.90      1748
   ```
-
-  
-
-  ------
 
   
 
@@ -89,10 +85,6 @@ For the analysis, I used the SVM (Support Vector Machines), Random Forest, and K
        macro avg       0.78      0.77      0.77      1748
     weighted avg       0.83      0.83      0.83      1748
   ```
-
-  
-
-  ------
 
   
 
@@ -141,25 +133,23 @@ For the analysis, I used the SVM (Support Vector Machines), Random Forest, and K
 
 - **Keras Deep Learning**
 
-  Normal Neural Network:
+  *Normal Neural Network:*
 
-  One layer with 10 nodes. Epoch = 1000
+  One layer with 10 units. Epoch = 1000
 
   ```
   Normal Neural Network - Loss: 0.25185666367991294, Accuracy: 0.8981693387031555
   ```
 
+  *Deep Neural Network:*
+
+  Two layers with 12 units. Epoch = 400
+
+  ```
+Deep Neural Network - Loss: 0.2640214726090158, Accuracy: 0.8987414240837097
+  ```
   
-
-  Deep Neural Network:
-
-  Two layers with 12 nodes. Epoch = 400
-
-  ```
-  Deep Neural Network - Loss: 0.2640214726090158, Accuracy: 0.8987414240837097
-  ```
-
-  Increasing number of layers, nodes, and epochs decreased the Accuracy.
+  With Keras Deep Neural Network, increasing the number of layers, nodes, and epochs beyond the numbers shown actually decreased the Accuracy. This may be due to "overfitting" the model. with additional tweaking and testing of parameters, the Keras model should be able to reach an Accuracy  score much closer to 1.0.
 
   
 
@@ -198,5 +188,3 @@ For the analysis, I used the SVM (Support Vector Machines), Random Forest, and K
   neural_network_model.h5
 
   deep_learning_model.h5
-
-#### 
